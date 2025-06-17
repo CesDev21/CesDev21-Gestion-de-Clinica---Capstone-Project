@@ -1,20 +1,43 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { InicioComponent } from './inicio/inicio.component';
-import { NosotrosComponent } from './nosotros/nosotros.component';
-import { ProductosComponent } from './productos/productos.component';
-import { EstadisticasComponent } from './estadisticas/estadisticas.component';
-import { MediaComponent } from './media/media.component';
-import { ConfiguracionComponent } from './configuracion/configuracion.component';
+import { HomeComponent } from './home/home.component';
+import { PacientesComponent } from './pacientes/pacientes.component';
+import { ModeloComponent } from './modelo/modelo.component';
+import { ChartsComponent } from './charts/charts.component';
+import { LoginComponent } from './login/login.component';
+import { MainComponent } from './layouts/main/main.component';
+import { AuthComponent } from './layouts/auth/auth.component';
+import { ChangePasswdComponent } from './change-passwd/change-passwd.component';
+
 
 const routes: Routes = [
-  {path: '', redirectTo: 'inicio', pathMatch: 'full'},
-  {path: 'inicio', component: InicioComponent},
-  {path: 'nosotros', component: NosotrosComponent},
-  {path: 'productos', component: ProductosComponent},
-  {path: 'estadisticas', component: EstadisticasComponent},
-  {path: 'media', component: MediaComponent},
-  {path: 'configuracion', component: ConfiguracionComponent},
+  // Redirigir a login al iniciar
+  { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
+
+  // Layout de autenticación
+  {
+    path: 'auth',
+    component: AuthComponent,
+    children: [
+      { path: 'login', component: LoginComponent },
+      { path: 'change-password', component: ChangePasswdComponent }
+    ]
+  },
+
+  // Layout principal
+  {
+    path: 'app',
+    component: MainComponent,
+    children: [
+      { path: 'Inicio', component: HomeComponent },
+      { path: 'Pacientes', component: PacientesComponent },
+      { path: 'Modelo', component: ModeloComponent },
+      { path: 'Charts', component: ChartsComponent }
+    ]
+  },
+
+  // Ruta comodín
+  { path: '**', redirectTo: 'auth/login' }
 ];
 
 @NgModule({
@@ -22,3 +45,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+export { routes };

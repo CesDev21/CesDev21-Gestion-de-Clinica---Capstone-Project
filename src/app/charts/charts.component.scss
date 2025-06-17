@@ -1,0 +1,187 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    overflow-x: hidden;
+}
+
+/* --- Estilos para la CAJA GRANDE EXTERNA (la "caja" azulina con fondo gris) --- */
+.main-container-with-blue-border {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Mantiene el contenido centrado verticalmente dentro de la caja si hay espacio */
+    
+    /* *** CAMBIO CRÍTICO AQUÍ: Reducimos el min-height o lo ajustamos a auto *** */
+    min-height: auto; /* Permite que la altura de la caja se adapte al contenido */
+    /* Opcional: si quieres un mínimo fijo, pero más pequeño, usa un valor como min-height: 600px; */
+    
+    padding: 30px;
+    box-sizing: border-box;
+
+    width: 80%;
+    max-width: 1100px;
+    margin: 10px auto; /* Para centrar y darle un pequeño margen superior */
+    
+    background-color: #f0f2f5;
+    border: 3px solid #007bff;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+
+    font-family: 'Roboto', sans-serif;
+}
+
+/* --- CONTENEDOR INTERNO FLEXIBLE (para organizar las dos secciones) --- */
+.charts-grid-container {
+    width: 100%;
+    height: auto;
+    /* Este min-height es el que asegura que el contenido interno tenga una altura mínima */
+    min-height: 400px; 
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    
+    gap: 50px;
+    
+    padding: 20px 0;
+    box-sizing: border-box;
+}
+
+/* --- Estilo de CADA SECCIÓN INDIVIDUAL (las "matrices" - fondo blanco, bordes redondeados, sombra) --- */
+.chart-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    
+    min-width: 280px;
+    max-width: 400px;
+    
+    background-color: #ffffff;
+    
+    border-radius: 15px;
+    padding: 25px; 
+    
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+    
+    box-sizing: border-box;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+}
+
+/* --- Estilos del Título --- */
+.title-box {
+    font-family: "Fredoka-Medium", Helvetica;
+    font-weight: 350;
+    color: #333333;
+    font-size: 30px; 
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+/* --- Estilos de la Imagen --- */
+.image-box {
+    width: 75%; 
+    height: auto;
+    max-height: 300px; 
+    object-fit: contain;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* --- Estilos de la Descripción --- */
+.desc-box {
+    font-family: "Roboto-Regular", Helvetica;
+    font-weight: 400;
+    color: #555555;
+    font-size: 15px; 
+    line-height: 1.6;
+    margin-top: auto;
+    flex-grow: 1;
+}
+
+/* --- Animaciones (tus animaciones existentes) --- */
+@keyframes appear {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.appear {
+    animation: appear 0.8s ease-out forwards;
+}
+
+.appear-title {
+    animation-delay: 0.2s;
+}
+
+.appear-image {
+    animation-delay: 0.4s;
+}
+
+.appear-desc {
+    animation-delay: 0.6s;
+}
+
+/* --- Ajustes Responsivos --- */
+@media (max-width: 992px) {
+    .main-container-with-blue-border {
+        padding: 20px;
+        max-width: 95%;
+        min-height: auto; /* También ajustar aquí para que no sea muy largo en tablets */
+        margin: 10px auto; 
+    }
+}
+
+@media (max-width: 768px) {
+    .charts-grid-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .chart-section {
+        max-width: 90%;
+    }
+
+    .main-container-with-blue-border {
+        margin: 10px auto; 
+        border-radius: 15px;
+        padding: 15px;
+        min-height: auto; /* Sigue siendo auto en móvil */
+    }
+    .image-box {
+        max-height: 250px; 
+    }
+}
+
+@media (max-width: 480px) {
+    .main-container-with-blue-border {
+        padding: 10px;
+        margin: 5px auto; 
+    }
+    .chart-section {
+        padding: 15px;
+    }
+    .title-box {
+        font-size: clamp(20px, 5vw, 28px);
+    }
+    .desc-box {
+        font-size: clamp(12px, 3vw, 14px);
+    }
+}

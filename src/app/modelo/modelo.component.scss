@@ -1,0 +1,136 @@
+
+//******************************************************************
+//                        MODELO INFO BOX
+//******************************************************************
+
+.box {
+    position: relative;
+    width: 0px;
+    height: 0px;
+    margin-top: -5px;
+    margin-left: 80px;
+}
+
+.box .overlap-group {
+    position: relative;
+    width: 1400px;
+    height: 700px;
+    margin-top: -5px;
+    margin-left: -20px;
+    background-color: #e7e7e7;
+    border-radius: 15px;
+    border: 10px solid;
+    border-color: #041135;
+    opacity: 1;
+}
+
+.box .button {
+    all: unset;
+    box-sizing: border-box;
+    display: flex;
+    width: 150px;
+    height: 52px;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    position: absolute;
+    top: 570px;
+    left: 215px;
+    background-color: #0f9efe;
+    border-radius: 15px;
+    border: 2px solid #0f62fe;
+    cursor: pointer;
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+        background-color: #0b7dda;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        transform: scale(1.03);
+    }
+
+    &:active {
+        background-color: #095a9e;
+        transform: scale(0.98);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.box .text-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0px 16px;
+    position: relative;
+    flex: 0 0 auto;
+    margin-top: -0.13px;
+    margin-bottom: -0.13px;
+}
+
+.box .button-text {
+    position: relative;
+    width: fit-content;
+    margin-top: -1.00px;
+    font-family: "Roboto-Medium", Helvetica;
+    font-weight: 500;
+    color: #fafafa;
+    font-size: 20px;
+    letter-spacing: 0.50px;
+    line-height: 20px;
+    white-space: nowrap;
+}
+
+.box .text-wrapper {
+    position: absolute;
+    width: 505px;
+    top: 80px;
+    left: 40px;
+    font-family: "Fredoka-Medium", Helvetica;
+    font-weight: 500;
+    color: #000000;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.box .upload-list-item {
+    position: absolute;
+    width: 117px;
+    height: 92px;
+    top: 260px;
+    left: 302px;
+    background-color: #0000000a;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid;
+    border-color: #970101;
+}
+
+.box .icon-pictureoutlined {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    top: 22px;
+    left: 36px;
+}
+
+.box .div {
+    position: absolute;
+    width: 80px;
+    height: 22px;
+    top: 80px;
+    left: 12px;
+    font-family: "SF Pro Text-Regular", Helvetica;
+    font-weight: 400;
+    color: #4da6ff;
+    font-size: 14px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 22px;
+}
+

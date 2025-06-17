@@ -1,34 +1,32 @@
 
 export const navbarData = [
+
     {
-        RouteLink: 'inicio',
-        icon: 'fal fa-home',
+        RouteLink: 'Inicio',
+        icon: 'fa-solid fa-home',
         label: 'Inicio'
     },
     {
-        RouteLink: 'nosotros',
-        icon: 'fal fa-user',
-        label: 'Nosotros'
+        RouteLink: 'Pacientes',
+        icon: 'fa-solid fa-folder-open',
+        label: 'Pacientes'
     },
     {
-        RouteLink: 'productos',
-        icon: 'fal fa-utensils',
-        label: 'Menu'
+        RouteLink: 'Modelo',
+        icon: 'fa-solid fa-puzzle-piece ',
+        label: 'Modelo'
+    },
+    
+    {
+        RouteLink: 'Charts',
+        icon: 'fa-solid fa-bar-chart',
+        label: 'Charts'
     },
 
     {
-        RouteLink: 'estadisticas',
-        icon: 'fal fa-chart-bar',
-        label: 'Estadisticas'
+        RouteLink: 'Logout',
+        icon: 'fa-solid fa-sign-out ',
+        label: 'Salir'
     },
-    {
-        RouteLink: 'media',
-        icon: 'fal fa-camera',
-        label: 'Media'
-    },
-    {
-        RouteLink: 'configuracion',
-        icon: 'fal fa-cog',
-        label: 'Configuracion'
-    }
+    
 ];

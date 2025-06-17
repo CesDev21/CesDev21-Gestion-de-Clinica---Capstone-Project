@@ -5,16 +5,19 @@ interface SideNavToggle {
   collapsed: boolean;
 }
 
+
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: 'app-main',
+  templateUrl: './main.component.html',
+  styleUrls: ['./main.component.scss']
 })
-export class AppComponent {
+export class MainComponent {
   title = 'proyectoprueba';
   isLoggedIn = false;
   isSideNavCollapsed = false;
   screenWidth = 0;
+
+
 
   handleLoginSuccess() {
     this.isLoggedIn = true;

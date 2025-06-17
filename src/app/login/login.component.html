@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="login-container">
+    <h2>Iniciar Sesión</h2>
+
+    <form (ngSubmit)="iniciarSesion()">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" [(ngModel)]="email" required>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" [(ngModel)]="password" required>
+
+      <button type="submit">Iniciar Sesión</button> <!-- ✅ Solo submit -->
+    </form>
+  </div>
+
+  <div class="image-container">
+    <img src="../../assets/images/pulmon.PNG" alt="Imagen decorativa" />
+  </div>
+</div>

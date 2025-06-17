@@ -1,0 +1,260 @@
+/* login.component.scss */
+
+:host {
+  display: block;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+
+  /* Nuevo fondo para todo el componente */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  animation: fadeInBackground 1s ease-out forwards;
+}
+
+/* El contenedor principal de tu HTML */
+.container {
+  width: 100%;
+  height: 100%; /* Ocupa el 100% del host */
+  display: flex;
+  justify-content: center; /* Centra horizontalmente el contenido */
+  align-items: center; /* Centra verticalmente el contenido */
+  padding: 20px;
+  box-sizing: border-box;
+  z-index: 1; /* Para que el contenido esté sobre cualquier cosa del host si la hubiera */
+}
+
+/* Estilo del formulario */
+.login-container {
+  width: 380px; /* Ancho fijo para el formulario */
+  flex-shrink: 0; /* Evita que el formulario se encoja */
+  height: auto;
+  min-height: 450px; /* Altura mínima para el formulario */
+  
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 50, 80, 0.2);
+  z-index: 2;
+  animation: slideInRight 0.8s ease-out forwards;
+  opacity: 0;
+  box-sizing: border-box;
+  margin-left: 40px; /* Espacio a la izquierda del formulario (separándolo de la imagen) */
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #00566d;
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.8px;
+  text-transform: uppercase;
+  border-bottom: 2px solid #00a8c7;
+  padding-bottom: 10px;
+}
+
+.login-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  label {
+    margin-bottom: 2px;
+    font-weight: 600;
+    color: #3f5062;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+  }
+
+  input {
+    margin-bottom: 5px;
+    padding: 14px 12px;
+    border-radius: 8px;
+    border: 1px solid #cceeff;
+    font-size: 1rem;
+    color: #333333;
+    background-color: #f8fcff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+    &:focus {
+      border-color: #007bbd;
+      box-shadow: 0 0 0 3px rgba(0, 123, 189, 0.2);
+      outline: none;
+    }
+  }
+
+  button {
+    padding: 16px;
+    background-color: #008cba;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      background-color: #006b8e;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0, 140, 186, 0.3);
+    }
+
+    &:active {
+      background-color: #005a76;
+      transform: translateY(0);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+.login-container .change-password {
+  text-align: center;
+  margin-top: 25px;
+  font-size: 0.9rem;
+
+  a {
+    color: #007bbd;
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #00566d;
+      text-decoration: underline;
+    }
+  }
+}
+
+/* Estilo de la imagen */
+.image-container {
+  width: 450px; /* Ancho fijo para el contenedor de la imagen */
+  flex-shrink: 0; /* Evita que la imagen se encoja */
+  display: flex; /* Para centrar la imagen dentro de su contenedor */
+  justify-content: center;
+  align-items: center;
+  z-index: 1; /* Por debajo del formulario pero sobre el fondo */
+  animation: slideInLeft 0.8s ease-out forwards;
+  opacity: 0;
+  margin-right: 40px; /* Espacio a la derecha de la imagen (separándola del formulario) */
+
+  img {
+    max-width: 100%; /* La imagen no excederá el ancho de su contenedor */
+    height: auto; /* Mantiene la proporción */
+    max-height: 450px; /* **Ajusta esta altura para que coincida visualmente con el formulario** */
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 50, 80, 0.2);
+    object-fit: contain; /* Asegura que la imagen completa sea visible */
+    display: block;
+  }
+}
+
+/* Animaciones */
+@keyframes fadeInBackground {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(50px); } /* Desplaza desde la derecha */
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-50px); } /* Desplaza desde la izquierda */
+  to { opacity: 1; transform: translateX(0); }
+}
+
+
+/* login.component.scss */
+
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column; /* Apila la imagen y el formulario */
+    gap: 40px; /* Espacio entre los elementos apilados */
+    padding: 20px;
+    height: auto; /* La altura se adapta al contenido */
+    min-height: 100vh; /* Asegura que al menos ocupe toda la altura de la ventana */
+  }
+
+  .login-container,
+  .image-container {
+    width: 90%; /* Ocupa más ancho en pantallas medianas */
+    max-width: 450px; /* Límite para que no sea demasiado grande */
+    margin: 0 auto; /* Centra horizontalmente */
+    /* Resetea los márgenes específicos de desktop */
+    margin-left: auto;
+    margin-right: auto;
+    /* Deshabilita animaciones para evitar saltos al reordenar */
+    animation: none;
+    opacity: 1;
+  }
+
+  .login-container {
+    order: 2; /* Pone el formulario debajo de la imagen */
+    z-index: 2;
+  }
+
+  .image-container {
+    order: 1; /* Pone la imagen arriba del formulario */
+    max-height: 300px; /* Altura máxima para la imagen en móvil */
+    z-index: 1;
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  /* A partir de 768px (tablets pequeñas y móviles), la imagen desaparece */
+  .image-container {
+    display: none; /* ¡La imagen desaparece! */
+  }
+
+  .container {
+    /* El contenedor ahora solo tiene el formulario, centrado */
+    flex-direction: column; /* Ya estaba así, pero se reafirma */
+    gap: 0; /* No hay gap si un elemento desaparece */
+    justify-content: center;
+    align-items: center;
+  }
+
+  .login-container {
+    width: 95%; /* El formulario puede ocupar más espacio ahora */
+    max-width: 400px; /* Ajusta el max-width para el formulario solo */
+    padding: 30px 25px; /* Reduce padding para pantallas más pequeñas */
+    margin: auto; /* Asegura que esté centrado sin la imagen */
+    order: 1; /* Ahora el formulario es el único elemento visible, así que es el primero */
+  }
+
+  .login-container h2 {
+    font-size: 2rem;
+    margin-bottom: 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 25px 20px;
+  }
+
+  .login-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+
+  .login-container form {
+    gap: 15px;
+  }
+
+  .login-container input {
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+
+  .login-container button {
+    padding: 12px;
+    font-size: 1rem;
+  }
+}

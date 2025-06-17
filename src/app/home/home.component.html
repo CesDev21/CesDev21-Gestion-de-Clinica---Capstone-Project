@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="home.component.scss" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="main-content-wrapper">
+        <div class="box">
+            <div class="overlap-group appear">
+                <div class="text-wrapper">Cargar imagen aqui</div>
+
+                <div class="image-section">
+                    <div *ngIf="!selectedImage && !imagePreviewUrl" class="placeholder-img">
+                        <p>Arrastra y suelta tu imagen aquí o</p> 
+                        
+                        <label for="imageUpload" class="upload-label">
+                            <i class="fa-solid fa-upload"></i>
+                            <span>Cargar imagen desde dispositivo</span>
+                        </label>
+                        <input #fileInput type="file" id="imageUpload" accept="image/*" (change)="onImageSelected($event)"
+                            style="display: none;" />
+                    </div>
+
+                    <div *ngIf="imagePreviewUrl" class="preview-container">
+                        <img [src]="imagePreviewUrl" alt="Imagen seleccionada" class="preview-image" />
+                        <button class="delete-button" (click)="confirmRemoveImage()">
+                            <i class="fa-solid fa-x"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="paciente-selector mb-3">
+                <label for="paciente">Seleccionar paciente:</label>
+                <select id="paciente" [(ngModel)]="pacienteSeleccionado" class="form-select">
+                    <option [ngValue]="null" disabled selected>Seleccione un paciente</option>
+                    <option *ngFor="let paciente of pacientes" [ngValue]="paciente.id">
+                    {{ paciente.codigo }} - {{ paciente.nombre }} {{ paciente.apellido }}
+                    </option>
+                </select>
+                </div>
+                <button class="button" (click)="onPredecir()">
+                    <div class="text-container">
+                        <div class="button-text">Predecir</div>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <div class="box2">
+            <div class="overlap-group2 appear">
+                <h3>Resultado de prediccion</h3>
+                <div *ngIf="!resultado" class="placeholder-resultados">
+                    <p>🔍 Los resultados aparecerán aquí después de hacer clic en "Predecir".</p>
+                </div>
+                <div *ngIf="resultado" class="resultado-box">
+                    <div class="contenido-horizontal">
+                        <div class="info">
+                            <p><strong>Clase:</strong> {{ resultado.prediccion_clase }}</p>
+                            <p><strong>Precisión estimada:</strong> {{ resultado.precision_estimada }}%</p>
+                            <p><strong>F1-score estimado:</strong> {{ resultado.f1_score_estimado }}</p>
+                            <p><strong>Porcentajes por clase:</strong></p>
+                            <ul>
+                                <li *ngFor="let clase of clases">
+                                    <div class="mini-donut" [style.--porcentaje]="resultado.porcentajes_por_clase[clase]">
+                                    </div>
+                                    <span class="etiqueta">{{ clase }}: {{ resultado.porcentajes_por_clase[clase] }}%</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="imagen">
+                            <img *ngIf="imagePreviewUrl" [src]="imagePreviewUrl" alt="Imagen cargada" />
+                        </div>
+                    </div>
+                    <div class="resumen-final">
+                        Resultado: <strong>{{ resultado.prediccion_clase }}</strong> detectado, el modelo predijo una
+                        probabilidad de
+                        <strong>{{ resultado.porcentajes_por_clase[resultado.prediccion_clase] }}%</strong>.
+                    </div>
+
+                    <!-- Botón de guardar diagnóstico -->
+                    <div class="text-center mt-3">
+                        <button class="btn btn-success" (click)="guardarDiagnostico()">
+                            <i class="fa-solid fa-floppy-disk"></i> Guardar diagnóstico
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
