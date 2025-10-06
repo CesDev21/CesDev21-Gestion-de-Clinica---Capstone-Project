@@ -1,0 +1,538 @@
+/* Fuentes de Google Fonts - Asegúrate de importarlas en tu HTML o CSS principal */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap');
+
+/* --- Sidenav Variables --- */
+$sidenav-default-width: 5rem; // Ancho del sidenav cuando está "colapsado" (solo iconos)
+$sidenav-expanded-width: 16.5625rem; // Ancho del sidenav cuando está "expandido"
+$logo-height: 70px; // Altura del área del logo en el sidenav
+
+/* --- Base Styles para el Body --- */
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #eef2f6;
+    color: #3f5062;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; // Previene scroll horizontal no deseado
+}
+
+/* --- Main Application Wrapper (Contendrá Sidenav y Contenido) --- */
+.main-content-wrapper {
+    display: flex; // Usa Flexbox para colocar el sidenav y el contenido lado a lado
+    min-height: 100vh; // Ocupa toda la altura de la ventana
+    width: 100%; // Asegura que ocupe todo el ancho
+}
+
+/* --- Sidenav Base Styles --- */
+.sidenav {
+    background: rgba(219, 247, 253, 255); // Tu fondo azul claro
+    transition: all .3s ease; // Transición más suave y rápida
+    position: fixed; // Fija el sidenav para que siempre esté visible
+    z-index: 1000; // Asegura que esté por encima del contenido principal
+    top: 0;
+    width: $sidenav-default-width; // Ancho por defecto (tu estado "colapsado")
+    height: 100vh;
+    box-shadow: 0.063rem 0 1.25rem 0 rgba(34, 32, 32, 0.08); // Sombra más sutil
+    overflow-x: hidden; // Evita el scroll horizontal en el sidenav
+}
+
+/* --- Sidenav Expanded State (Tu clase 'sidenav-collapsed' es en realidad el estado expandido) --- */
+.sidenav-collapsed { // Esta clase hace que el sidenav sea MÁS ANCHO (expandido)
+    width: $sidenav-expanded-width;
+}
+
+/* --- Logo Container Styles --- */
+.logo-container {
+    display: flex;
+    align-items: center;
+    padding: 0.938rem 0.938rem 0 0.938rem;
+    width: 100%;
+    height: $logo-height; // Altura fija
+    box-sizing: border-box;
+    background-color: rgba(219, 247, 253, 255); // Fondo igual al sidenav
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05); // Separador sutil
+
+    .logo {
+        color: #007bff; // Azul primario para el icono (más médico)
+        background: transparent; // Fondo transparente
+        text-align: center;
+        width: 3rem;
+        min-width: 3rem;
+        border-radius: 0.313rem;
+        padding: 0.313rem;
+        font-size: 24px;
+        font-weight: 900;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+            background-color: rgba(0, 123, 255, 0.1); // Efecto hover más suave
+            color: #0056b3; // Azul oscuro al pasar el ratón
+        }
+    }
+
+    .logo-text {
+        margin-left: 1.5rem;
+        font-size: 24px;
+        font-weight: 700;
+        color: #3f5062;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        transition-delay: 0.1s;
+
+        // **¡AJUSTE CLAVE AQUÍ!**
+        img {
+            // Asegura que la imagen no exceda el ancho de su contenedor
+            max-width: 100%; 
+            // Controla la altura para que no desborde el contenedor del logo.
+            // Puedes experimentar con un valor fijo o un porcentaje.
+            height: 40px; // Prueba con esta altura (ejemplo). Ajusta según el tamaño de tu logo.
+            // Para asegurarte de que la imagen se ajuste manteniendo su relación de aspecto.
+            object-fit: contain; 
+            display: block; // Ayuda a eliminar cualquier espacio extra debajo de la imagen
+        }
+    }
+    
+    /* NUEVA CLASE: Cuando el texto debe ser visible */
+    .logo-text.logo-text-visible {
+        opacity: 1;
+    }
+}
+
+/* --- Sidenav Navigation Items --- */
+.sidenav-nav {
+    list-style: none;
+    padding: 0.938rem; // Padding superior e inferior
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center; // Centra los elementos cuando el sidenav es estrecho
+    cursor: pointer;
+    margin-top: 20px; // Margen superior
+
+    // REPARACIÓN: CALCULAR ALTURA PARA EVITAR SCROLLBAR
+    // Suma de elementos fijos encima/debajo del sidenav-nav:
+    // $logo-height (70px) + 2 * 0.938rem (padding-top y padding-bottom del sidenav-nav) + 20px (margin-top del sidenav-nav)
+    // Aproximadamente: 70px + (15px * 2) + 20px = 120px
+    height: calc(100vh - (#{$logo-height} + (0.938rem * 2) + 20px));
+    
+    overflow-y: auto; // Permite el scroll vertical dentro de esta sección si los ítems exceden el alto
+    overflow-x: hidden; // Evita el scroll horizontal en la lista
+
+    /* Estilos para el scrollbar (solo para navegadores basados en Webkit como Chrome y Safari) */
+    &::-webkit-scrollbar {
+        width: 6px; // Ancho del scrollbar
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #f1f1f1; // Fondo de la pista del scrollbar
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #888; // Color del "pulgar" del scrollbar
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: #555; // Color del "pulgar" al pasar el ratón
+    }
+
+    .sidenav-nav-item {
+        width: 100%;
+        margin-bottom: 0.625rem;
+
+        .sidenav-nav-link {
+            display: flex;
+            align-items: center;
+            height: 3rem;
+            color: #3f5062; // Color de texto consistente
+            border-radius: 0.625rem;
+            text-decoration: none;
+            transition: background-color .3s ease, color .3s ease;
+
+            .sidenav-link-icon {
+                font-size: 22px;
+                width: $sidenav-default-width - 2rem; // Espacio fijo para el icono
+                min-width: 2rem;
+                margin: 0 0.5rem;
+                text-align: center;
+            }
+
+            .sidenav-link-text {
+                margin-left: 1.5rem;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                
+                opacity: 0; /* Por defecto, oculto */
+                transition: opacity 0.3s ease; /* Transición para cuando aparece/desaparece */
+                transition-delay: 0.1s; /* Retraso para que el texto aparezca después del ancho */
+            }
+
+            /* NUEVA CLASE: Cuando el texto debe ser visible */
+            .sidenav-link-text.sidenav-link-text-visible {
+                opacity: 1;
+            }
+        }
+    }
+
+    .sidenav-nav-item:hover {
+        .sidenav-nav-link {
+            background-color: #007bff; // Azul primario al pasar el ratón
+            color: rgb(255, 255, 255);
+        }
+    }
+}
+
+/* --- Active Sidenav Link Styles --- */
+.active {
+    background-color: #007bff; // Azul primario para el enlace activo
+
+    .sidenav-link-icon,
+    .sidenav-link-text {
+        color: rgb(255, 255, 255);
+    }
+}
+
+/* --- Main Content Area --- */
+.content {
+    // Margen inicial para desktop, asumiendo el sidenav está en su estado "default" (colapsado de 5rem)
+    margin-left: $sidenav-default-width;
+    flex-grow: 1; // Ocupa el espacio restante
+    padding: 20px; // Padding general para el contenido
+    transition: margin-left 0.3s ease-in-out; // Anima el empuje del contenido
+
+    .patient-management-container {
+        // Los estilos de tu contenedor principal de pacientes
+        padding: 40px;
+        max-width: 1400px;
+        margin: 0 auto; // Centra el contenido dentro de su propio espacio
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+        border: 1px solid #e0e6ed;
+    }
+    
+    .page-title {
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        color: #0056b3;
+        margin-bottom: 0;
+        font-size: 2.2rem;
+    }
+
+    .add-patient-btn {
+        background-color: #007bff;
+        border-color: #007bff;
+        font-weight: 500;
+        padding: 10px 20px;
+        border-radius: 8px;
+        transition: all 0.2s ease-in-out;
+        color: white;
+
+        &:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+        }
+    }
+
+    .patient-table-card {
+        border: none;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+
+        .card-body {
+            padding: 0;
+        }
+    }
+
+    .patient-data-table {
+        margin-bottom: 0;
+        font-size: 0.9rem;
+
+        th, td {
+            padding: 1rem 1.25rem;
+            vertical-align: middle;
+        }
+
+        .table-light {
+            th {
+                background-color: #f5f8fb;
+                color: #5a6a7e;
+                font-weight: 600;
+                border-bottom: 2px solid #dae2ed;
+                text-transform: uppercase;
+                font-size: 0.85rem;
+                letter-spacing: 0.05em;
+            }
+        }
+
+        tbody {
+            tr {
+                transition: background-color 0.2s ease;
+                &:hover {
+                    background-color: #eaf6ff;
+                }
+                td {
+                    border-color: #f0f4f7;
+                }
+            }
+        }
+
+        .btn-info {
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+            color: white;
+            &:hover {
+                background-color: #138496;
+                border-color: #117a8b;
+            }
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            color: white;
+            &:hover {
+                background-color: #c82333;
+                border-color: #bd2130;
+            }
+        }
+        .btn-sm {
+            padding: .3rem .6rem;
+            font-size: .75rem;
+            border-radius: 6px;
+        }
+    }
+}
+
+/* Cuando el sidenav está en su estado "collapsed" (que es tu estado expandido de 16.5625rem) */
+.content-collapsed {
+    margin-left: $sidenav-expanded-width;
+}
+
+
+/* --- Modals --- */
+.modal-dialog-centered {
+    display: flex;
+    align-items: center;
+    min-height: calc(100% - 1rem);
+}
+
+.modal-content {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+
+    .modal-header {
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        background-color: #007bff;
+        color: white;
+        border-bottom: none;
+        padding: 1.2rem 1.5rem;
+
+        .modal-title {
+            font-weight: 600;
+            font-size: 1.4rem;
+            font-family: 'Inter', sans-serif;
+        }
+        .btn-close-white {
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+    }
+    .modal-body {
+        padding: 30px;
+    }
+    .modal-footer {
+        border-top: 1px solid #e0e6ed;
+        padding: 20px 30px;
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            border-radius: 8px;
+            &:hover {
+                background-color: #5a6268;
+                border-color: #545b62;
+            }
+        }
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+            border-radius: 8px;
+            &:hover {
+                background-color: #218838;
+                border-color: #1e7e34;
+            }
+        }
+    }
+}
+
+// Form specific styles within modals
+.form-label {
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: .5rem;
+    font-size: 0.9rem;
+}
+
+.form-control, .form-select {
+    border-radius: 8px;
+    padding: .75rem .9rem;
+    border: 1px solid #cdd6e1;
+    font-size: 0.95rem;
+    &:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+}
+
+
+/* --- Responsive Adjustments (Media Queries) --- */
+
+// Desktop (min-width: 992px)
+// No cambios específicos aquí, el comportamiento base es el deseado.
+@media (min-width: 992px) {
+    // Si necesitas algún ajuste específico para texto en este breakpoint, añádelo aquí.
+}
+
+// Tablets (768px a 991.98px)
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .sidenav {
+        width: $sidenav-default-width; // Inicia en 5rem
+
+        // Los textos están ocultos por defecto, solo se mostrarán con .logo-text-visible o .sidenav-link-text-visible
+        .logo-text, .sidenav-link-text {
+            opacity: 0;
+        }
+
+        &.sidenav-collapsed { // Si se expande (toggleado)
+            width: $sidenav-expanded-width;
+            // No es necesario definir opacity: 1 aquí, las clases específicas se encargarán
+        }
+    }
+    .content {
+        margin-left: $sidenav-default-width; // El contenido empieza después del sidenav colapsado
+        .patient-management-container {
+            padding: 30px; // Menos padding en tablets
+            width: 95%; // Ocupa más ancho
+        }
+    }
+    .content-collapsed { // Cuando el sidenav está expandido
+        margin-left: $sidenav-expanded-width;
+    }
+    .page-title {
+        font-size: 2.1rem;
+    }
+}
+
+// Mobile (max-width: 767.98px)
+@media (max-width: 767.98px) {
+    .sidenav {
+        width: 0; // Completamente oculto por defecto
+        left: 0;
+        box-shadow: none;
+        transition: width 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
+        // Los textos están ocultos por defecto
+        .logo-text, .sidenav-link-text {
+            opacity: 0;
+        }
+
+        &.sidenav-collapsed { // Esta clase ahora significa que el Sidenav está ABIERTO en móvil
+            width: $sidenav-expanded-width;
+            box-shadow: 0 0px 15px rgba(0, 0, 0, 0.25);
+            // No es necesario definir opacity: 1 aquí, las clases específicas se encargarán
+        }
+    }
+
+    .content {
+        margin-left: 0;
+        padding: 15px;
+        .patient-management-container {
+            padding: 15px;
+            margin: 15px auto;
+            border-radius: 8px;
+        }
+    }
+
+    .content-collapsed {
+        margin-left: 0;
+    }
+
+    .page-title {
+        font-size: 1.8rem;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .row.mb-4.align-items-center {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .col-md-6.text-md-end {
+        text-align: center !important;
+    }
+
+    .add-patient-btn {
+        width: 100%;
+        padding: 12px 15px;
+        font-size: 1rem;
+    }
+
+    .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border: 1px solid #e0e6ed;
+        border-radius: 8px;
+    }
+
+    .patient-data-table {
+        min-width: 768px;
+        font-size: 0.8rem;
+
+        th, td {
+            padding: 0.75rem 1rem;
+        }
+
+        .btn-sm {
+            padding: .25rem .5rem;
+            font-size: .65rem;
+        }
+    }
+
+    .modal-dialog {
+        margin: 1rem;
+    }
+
+    .modal-content {
+        border-radius: 10px;
+    }
+
+    .modal-body {
+        padding: 20px;
+    }
+
+    .modal-footer {
+        padding: 15px 20px;
+    }
+
+    .form-label {
+        font-size: 0.85rem;
+    }
+
+    .form-control, .form-select {
+        padding: .6rem .75rem;
+        font-size: 0.9rem;
+    }
+}

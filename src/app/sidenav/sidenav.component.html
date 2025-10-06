@@ -1,0 +1,30 @@
+<div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed' : ''">
+    <div class="logo-container">
+        <button class="logo" (click)="toggleCollapse()">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="logo-text" [class.logo-text-visible]="collapsed">
+            <img src="../../assets/images/titulo.PNG" alt="logo-sidevar">
+        </div>
+    </div>
+
+    <ul class="sidenav-nav">
+        <li class="sidenav-nav-item" *ngFor="let data of navData">
+            <a class="sidenav-nav-link"
+               *ngIf="data.label !== 'Salir'"
+               [routerLink]="[data.RouteLink]"
+               routerLinkActive="active"
+               [routerLinkActiveOptions]="{ exact: true }">
+                <i class="sidenav-link-icon" [class]="data.icon"></i>
+                <span class="sidenav-link-text" [class.sidenav-link-text-visible]="collapsed">{{ data.label }}</span>
+            </a>
+
+            <a class="sidenav-nav-link"
+               *ngIf="data.label === 'Salir'"
+               (click)="onLogoutClick()">
+                <i class="sidenav-link-icon" [class]="data.icon"></i>
+                <span class="sidenav-link-text" [class.sidenav-link-text-visible]="collapsed">{{ data.label }}</span>
+            </a>
+        </li>
+    </ul>
+</div>

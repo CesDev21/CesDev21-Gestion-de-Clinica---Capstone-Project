@@ -1,0 +1,245 @@
+<div class="container-fluid py-4 patient-management-container">
+    <div class="row mb-4 align-items-center">
+        <div class="col-md-6">
+            <h1 class="page-title">Administración de Pacientes</h1>
+        </div>
+        <div class="col-md-6 text-md-end">
+            <button class="btn btn-primary add-patient-btn" (click)="abrirModal()">
+                <i class="bi bi-plus-circle me-2"></i> Agregar Paciente
+            </button>
+        </div>
+    </div>
+
+    <div class="card shadow-sm patient-table-card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped patient-data-table">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">N°</th>
+                            <th scope="col">Código</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido</th>
+                            <th scope="col">DNI</th>
+                            <th scope="col">Correo</th>
+                            <th scope="col">Teléfono</th>
+                            <th scope="col">Edad</th>
+                            <th scope="col">Género</th>
+                            <th scope="col">Historial Diagnóstico</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of data; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ item.codigo }}</td>
+                            <td>{{ item.nombre }}</td>
+                            <td>{{ item.apellido }}</td>
+                            <td>{{ item.dni }}</td>
+                            <td>{{ item.correo }}</td>
+                            <td>{{ item.telefono }}</td>
+                            <td>{{ item.edad }}</td>
+                            <td>{{ item.genero }}</td>
+                            <td class="text-center">
+                              <button class="btn btn-success" (click)="abrirHistorialModal(item.id)">Ver</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-info btn-sm me-2" (click)="abrirModalEditar(item)">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm" (click)="eliminarPaciente(item.id)">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr *ngIf="!data || data.length === 0">
+                            <td colspan="11" class="text-center text-muted py-4">No hay pacientes registrados.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="pacienteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <form #form="ngForm" (ngSubmit)="GuardarPaciente(form.valid, form.form.value)">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Nuevo Paciente</h5>
+                    <button type="button" class="btn-close btn-close-white" (click)="cerrarModal()" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="codigo" class="form-label">Código <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="codigo" name="codigo" [(ngModel)]="registro.codigo" required />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="nombre" class="form-label">Nombre <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="registro.nombre" required />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="apellido" class="form-label">Apellido <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="apellido" name="apellido" [(ngModel)]="registro.apellido" required />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="dni" class="form-label">DNI <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="dni" name="dni" [(ngModel)]="registro.dni" required />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="correo" class="form-label">Correo <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" id="correo" name="correo" [(ngModel)]="registro.correo" required />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="telefono" class="form-label">Teléfono <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="telefono" name="telefono" [(ngModel)]="registro.telefono" required />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="edad" class="form-label">Edad <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" id="edad" name="edad" [(ngModel)]="registro.edad" required />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="genero" class="form-label">Género <span class="text-danger">*</span></label>
+                            <select class="form-select" id="genero" name="genero" [(ngModel)]="registro.genero" required>
+                                <option value="">Seleccione</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="Masculino">Masculino</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="cerrarModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editarPacienteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <form #formEditar="ngForm" (ngSubmit)="actualizarPaciente(formEditar.valid)">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Editar Paciente</h5>
+                    <button type="button" class="btn-close btn-close-white" (click)="cerrarModalEditar()" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body" *ngIf="pacienteSeleccionado">
+                    <div class="mb-3">
+                        <label class="form-label">Código</label>
+                        <input type="text" class="form-control" name="codigo" [(ngModel)]="pacienteSeleccionado.codigo" disabled />
+                        </div>
+                    <div class="mb-3">
+                        <label class="form-label">DNI</label>
+                        <input type="text" class="form-control" name="dni" [(ngModel)]="pacienteSeleccionado.dni" disabled />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Nombre <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="nombre" [(ngModel)]="pacienteSeleccionado.nombre" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Apellido <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="apellido" [(ngModel)]="pacienteSeleccionado.apellido" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Correo <span class="text-danger">*</span></label>
+                        <input type="email" class="form-control" name="correo" [(ngModel)]="pacienteSeleccionado.correo" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Teléfono <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="telefono" [(ngModel)]="pacienteSeleccionado.telefono" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Edad <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" name="edad" [(ngModel)]="pacienteSeleccionado.edad" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Género <span class="text-danger">*</span></label>
+                        <select class="form-select" name="genero" [(ngModel)]="pacienteSeleccionado.genero" required>
+                            <option value="">Seleccione</option>
+                            <option value="Femenino">Femenino</option>
+                            <option value="Masculino">Masculino</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="cerrarModalEditar()">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Actualizar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para historial de diagnósticos -->
+<div class="modal fade" id="historialModal" tabindex="-1" aria-labelledby="modalHistorialLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content shadow-lg rounded-4 border-0">
+      
+      <!-- Encabezado del modal -->
+      <div class="modal-header bg-primary text-white rounded-top-4">
+        <h5 class="modal-title fw-semibold" id="modalHistorialLabel">🧾 Historial Diagnóstico</h5>
+        <button type="button" class="btn-close btn-close-white" (click)="cerrarHistorialModal()" aria-label="Cerrar"></button>
+      </div>
+      
+      <!-- Cuerpo del modal -->
+      <div class="modal-body px-4 py-3">
+        <div *ngIf="historial.length > 0; else sinHistorial">
+          
+          <div *ngFor="let diag of historial" class="mb-4 p-4 bg-light rounded shadow-sm border-start border-4 border-primary">
+            <div class="mb-2">
+              <span class="fw-bold text-secondary">👨‍⚕️ Doctor:</span>
+              <span class="ms-2">{{ diag.paciente?.doctor?.nombre + ' ' + diag.paciente?.doctor?.apellido || 'Desconocido' }}</span>
+            </div>
+            <div class="mb-2">
+              <span class="fw-bold text-secondary">🕒 Fecha:</span>
+              <span class="ms-2">{{ diag.fechaDiagnostico | date:'medium' }}</span>
+            </div>
+            <div class="mb-2">
+                <span class="fw-bold text-secondary">📋 Resultado del Modelo:</span>
+                <pre class="ms-2 text-wrap bg-white p-2 rounded border" style="white-space: pre-wrap;">{{ diag.resultadoModelo }}</pre>
+            </div>
+
+            <div class="mb-2">
+                <span class="fw-bold text-secondary">📝 Anotaciones:</span>
+
+                <!-- Si es el diagnóstico más reciente -->
+                <ng-container *ngIf="diag === getDiagnosticoMasReciente(); else soloLectura">
+                <textarea class="form-control mt-2" [(ngModel)]="diag.anotaciones" rows="3"></textarea>
+                <button class="btn btn-sm btn-success mt-2" (click)="guardarAnotacion(diag)">Guardar anotación</button>
+                </ng-container>
+
+                <!-- Si NO es el diagnóstico más reciente -->
+                <ng-template #soloLectura>
+                <span class="ms-2">{{ diag.anotaciones || 'Sin anotaciones' }}</span>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+
+        <!-- En caso no haya historial -->
+        <ng-template #sinHistorial>
+          <div class="text-center text-muted py-5">
+            <h5 class="mb-3">📭 Sin historial disponible</h5>
+            <p>Este paciente aún no tiene diagnósticos registrados.</p>
+          </div>
+        </ng-template>
+      </div>
+
+      <!-- Pie del modal -->
+      <div class="modal-footer border-0">
+        <button type="button" class="btn btn-outline-primary rounded-pill px-4" (click)="cerrarHistorialModal()">Cerrar</button>
+      </div>
+
+    </div>
+  </div>
+</div>

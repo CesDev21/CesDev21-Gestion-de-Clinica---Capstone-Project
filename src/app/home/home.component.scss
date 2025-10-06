@@ -1,0 +1,680 @@
+//******************************************************************
+//              CONTENEDOR PRINCIPAL DEL LAYOUT
+//******************************************************************
+
+
+/* Your .main-content-wrapper CSS (with minor adjustments for clarity) */
+.main-content-wrapper {
+    display: flex; /* Enables Flexbox */
+    flex-wrap: wrap; /* Allows items to wrap to the next line on small screens */
+    justify-content: center; /* Centers items horizontally */
+    align-items: flex-start; /* Aligns items to the start (top) */
+    gap: 100px; /* 15px space between .box and .box2 */
+    padding: 20px; /* General padding around all content */
+    max-width: 1400px; /* Limits the total width on very large screens */
+    margin: 0 auto; /* Centers the main container on the page */
+    background-color: transparent; /* Explicitly ensure this wrapper has no background */
+    border: none; /* Explicitly ensure this wrapper has no border */
+}
+
+
+//******************************************************************
+//              HOME PRIMER CUADRO
+//******************************************************************
+
+.box {
+    position: relative; /* Mantén relative si hay elementos con position: absolute dentro */
+    width: 100%; /* Ocupará todo el ancho del main-content-wrapper si está apilado */
+    max-width: 500px; /* Ancho máximo para el primer cuadro en pantallas grandes */
+    flex-grow: 1; /* Permite que crezca para ocupar espacio disponible */
+    flex-shrink: 1; /* Permite que se encoja */
+    min-width: 300px; /* Ancho mínimo para que el contenido sea legible */
+    margin-top: 0; /* Elimina márgenes fijos, el gap los maneja */
+    margin-left: 0; /* Elimina márgenes fijos */
+    box-sizing: border-box;
+}
+
+.box .overlap-group {
+    position: relative;
+    width: 100%; /* Ocupa el 100% del ancho de .box */
+    height: auto; /* La altura se ajusta al contenido */
+    min-height: 500px; /* Asegura una altura mínima si el contenido es escaso */
+    padding: 30px; /* Relleno interno para el contenido */
+    margin-top: 0; /* Elimina márgenes fijos si no son necesarios */
+    margin-left: 0; /* Elimina márgenes fijos si no son necesarios */
+    background-color: #e7e7e7; /* ***Fondo gris restaurado*** */
+    border-radius: 15px;
+    border: 10px solid #041135; /* ***Borde azul restaurado*** */
+    opacity: 1;
+    display: flex; /* Usa flexbox para organizar el contenido interno */
+    flex-direction: column; /* Apila el contenido verticalmente */
+    align-items: center; /* Centra el contenido horizontalmente */
+    gap: 20px; /* Espacio entre los elementos internos */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agrega una pequeña sombra para dar profundidad */
+    box-sizing: border-box;
+}
+
+.box .button {
+    all: unset;
+    box-sizing: border-box;
+    display: flex;
+    width: 150px;
+    height: 52px;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    position: relative;
+    background-color: #0f62fe;
+    border-radius: 15px;
+    border: 2px solid #0f62fe;
+    cursor: pointer;
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+        background-color: #76adda;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        transform: scale(1.03);
+    }
+
+    &:active {
+        background-color: #095a9e;
+        transform: scale(0.98);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.box .text-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0px 16px;
+    position: relative;
+    flex: 0 0 auto;
+    margin-top: -0.13px;
+    margin-bottom: -0.13px;
+}
+
+.box .button-text {
+    position: relative;
+    width: fit-content;
+    margin-top: -1.00px;
+    font-family: "Roboto-Medium", Helvetica;
+    font-weight: 500;
+    color: #fafafa;
+    font-size: 20px;
+    letter-spacing: 0.50px;
+    line-height: 20px;
+    white-space: nowrap;
+}
+
+.box .text-wrapper {
+    position: relative;
+    width: 90%;
+    font-family: "Fredoka-Medium", Helvetica;
+    font-weight: 500;
+    color: #000000;
+    font-size: clamp(24px, 4vw, 32px);
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: normal;
+    margin-bottom: 20px;
+}
+
+// Puedes eliminar .upload-list-item, .icon-pictureoutlined, .div si no se usan
+// o adaptar su posicionamiento si son necesarios.
+.box .upload-list-item {
+    position: relative;
+    width: 117px;
+    height: 92px;
+    background-color: #0000000a;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid;
+    border-color: #970101;
+}
+
+.box .icon-pictureoutlined {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    top: auto;
+    left: auto;
+}
+
+.box .div {
+    position: relative;
+    width: 80px;
+    height: 22px;
+    font-family: "SF Pro Text-Regular", Helvetica;
+    font-weight: 400;
+    color: #4da6ff;
+    font-size: 14px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 22px;
+}
+
+@keyframes fadeSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.appear {
+    animation: fadeSlideIn 0.8s ease-out both;
+}
+
+
+
+//******************************************************************
+//              HOME SEGUNDO CUADRO
+//******************************************************************
+
+.box2 {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    flex-grow: 1.5;
+    flex-shrink: 1;
+    min-width: 350px;
+    margin-top: 0;
+    margin-left: 0;
+    box-sizing: border-box;
+}
+
+.box2 .overlap-group2 {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 500px;
+    padding: 30px;
+    margin-top: 0;
+    margin-left: 0;
+    background-color: #e7e7e7; /* ***Fondo gris restaurado*** */
+    border-radius: 15px;
+    border: 10px solid #041135; /* ***Borde azul restaurado*** */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agrega una pequeña sombra para dar profundidad */
+    box-sizing: border-box;
+}
+
+.box2 h3 {
+    position: relative;
+    margin-bottom: 20px;
+    font-size: clamp(24px, 4vw, 32px);
+    color: #000000;
+    text-align: center;
+    width: 100%;
+}
+
+// Si eliminas los div vacíos del HTML, estas reglas CSS no serán necesarias:
+// .box2 .text-wrapper2, .box2 .overlap, .box2 .div, .box2 .text-wrapper-2, .box2 .mask-group, .box2 .union, .box2 .img {
+//     display: none;
+// }
+
+
+.box2 .rectangle,
+.box2 .rectangle-2,
+.box2 .rectangle-3 {
+    position: relative;
+    width: 60%;
+    height: 8px;
+    border-radius: 15px;
+    margin: 5px auto;
+}
+
+.box2 .rectangle { background-color: #ff080c; }
+.box2 .rectangle-2 { background-color: #4c8ef0; }
+.box2 .rectangle-3 { background-color: #07ff8f; }
+
+
+.box2 .text-wrapper-2 {
+    position: relative;
+    font-family: "Roboto-SemiBold", Helvetica;
+    font-weight: 600;
+    color: #000000;
+    font-size: clamp(20px, 3vw, 24px);
+    letter-spacing: 0.50px;
+    line-height: normal;
+    white-space: nowrap;
+    margin-bottom: 10px;
+}
+
+.box2 .text-wrapper-4,
+.box2 .text-wrapper-5,
+.box2 .text-wrapper-6 {
+    position: relative;
+    font-size: clamp(14px, 2vw, 15px);
+    line-height: normal;
+    font-family: "Roboto-SemiBold", Helvetica;
+    font-weight: 600;
+    color: #000000;
+    letter-spacing: 0.50px;
+    white-space: nowrap;
+    margin-bottom: 5px;
+}
+
+.box2 .tipo-ACA-SCC-normal,
+.box2 .precisi-n-score {
+    position: relative;
+    font-family: "Roboto-SemiBold", Helvetica;
+    font-weight: 600;
+    color: #000000;
+    font-size: clamp(20px, 3vw, 24px);
+    letter-spacing: 0.50px;
+    line-height: normal;
+    margin-top: 15px;
+    text-align: center;
+    width: 100%;
+}
+
+
+//******************************************************************
+// HOME CARGAR IMAGEN / PREVIEW
+//******************************************************************
+.image-section {
+    position: relative; // Si algún elemento interno será absolute
+    width: 100%; // Ocupa todo el ancho disponible dentro de .overlap-group
+    max-width: 400px; // Puedes limitar el ancho máximo si las imágenes son muy grandes
+    margin-bottom: 30px; // Espacio entre la sección de imagen y el botón de predecir
+    display: flex; // Usa flexbox para alinear el contenido interno (upload-box/preview)
+    flex-direction: column; // Apila verticalmente
+    align-items: center; // Centra horizontalmente
+    gap: 15px; // Espacio entre el placeholder y el botón de cargar si estuviera separado
+}
+.upload-box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    // margin-top: 20px; /* Ya no es necesario si image-section tiene gap */
+    width: 100%;
+    // Añade el tamaño que quieres para el área visible del "cuadro donde cargará la imagen"
+    min-height: 250px; // Mínima altura para el área de carga
+    border: 2px dashed #bbb; // Borde punteado para indicar zona de carga
+    border-radius: 12px;
+    background-color: #f0f0f0; // Un fondo sutil para la zona de carga
+    padding: 20px;
+    box-sizing: border-box; // Asegura que padding y border estén dentro del width/height
+}
+
+.upload-box .upload-label {
+    // ... (mantén tus estilos existentes para el label) ...
+    // Asegúrate que el label y el icono sean lo suficientemente grandes para ser cliqueables.
+}
+
+/* --- Placeholder para imagen (cuando no hay imagen) --- */
+.placeholder-img {
+    // Este div ahora debe ser el que visualmente representa el área de carga cuando no hay imagen
+    background-color: #f0f0f0; /* Fondo del placeholder */
+    border: 2px dashed #bbb; /* Borde punteado para el placeholder */
+    border-radius: 12px;
+    padding: 30px;
+    // margin-top: 40px; /* No necesario si image-section tiene gap */
+    text-align: center;
+    color: #666;
+    font-style: italic;
+
+    width: 100%; /* Ocupa el 100% del image-section */
+    height: 250px; /* Altura fija para el placeholder */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+
+    p {
+        font-size: clamp(1rem, 2.5vw, 1.2rem);
+        color: #888;
+        margin: 0; // Quita el margen predeterminado del párrafo
+    }
+}
+
+/* --- Preview de imagen (cuando hay imagen cargada) --- */
+.preview-container {
+    // margin-top: 30px; /* No necesario si image-section tiene gap */
+    text-align: center;
+    position: relative;
+    width: 100%;
+    //max-width: 300px; // Este max-width puede estar bien si quieres que la imagen sea más pequeña
+    height: 250px; // Altura fija para el área de la imagen cargada
+    // padding-bottom: 100%; /* Eliminar si usas height fijo para controlar el tamaño del contenedor */
+    overflow: hidden;
+    border: 2px solid #ccc; // Un borde para la imagen cargada
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.preview-container .preview-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; // Esto asegura que la imagen cubra el área sin distorsionarse
+    border: none; // El borde ya lo tiene el .preview-container
+    border-radius: 8px; // Puede ser un poco más pequeño que el del contenedor si quieres un efecto
+    box-shadow: none; // La sombra ya la tiene el .preview-container
+    display: block;
+}
+
+.preview-container .delete-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: white;
+    z-index: 10;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background-color: rgb(145, 73, 73);
+        transform: scale(1.1);
+    }
+}
+// Esta clase .delete-button duplicada es genérica, asegúrate cuál estás usando.
+// Si solo usas la de .preview-container, puedes eliminar esta.
+.delete-button {
+    // Mantengo el estilo general del delete-button si se usa fuera de preview-container
+    // pero recomiendo usar la version anidada para mas control.
+}
+
+
+.preview-container .text-wrapper-3 {
+    margin-top: 50px;
+    font-weight: bold;
+    color: white;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+}
+
+//******************************************************************
+// HOME RESULTADOS BOX
+//******************************************************************
+
+.resultado-box {
+    background-color: #e7e7e7;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    position: relative;
+    animation: fadeIn 1s ease-in-out;
+    width: 100%;
+    height: auto;
+    min-height: 400px;
+    box-sizing: border-box;
+
+    p {
+        margin: 6px 0;
+        font-size: clamp(14px, 2.5vw, 16px);
+        color: #000000;
+
+        strong {
+            color: #000000;
+        }
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 12px 0 20px;
+
+        li {
+            position: relative;
+            background: #f0f4ff;
+            border: 1px solid #786bee;
+            padding: 12px 12px 10px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            animation: slideInUp 0.7s ease forwards;
+            font-weight: 500;
+            color: #000000;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            font-size: clamp(14px, 2.5vw, 16px);
+
+            &:hover {
+                background-color: #ffffff;
+                transform: scale(1.02);
+            }
+
+            .barra-contenedor {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                height: 8px;
+                width: 100%;
+                background-color: #e0e0e0;
+                border-radius: 0 0 8px 8px;
+                overflow: hidden;
+            }
+
+            .barra-porcentaje {
+                height: 100%;
+                background-color: #786bee;
+                width: 0;
+                transition: width 1.2s ease;
+            }
+
+            .etiqueta {
+                position: relative;
+                z-index: 1;
+            }
+        }
+    }
+
+    .contenido-horizontal {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .info {
+        flex: 1;
+        padding-right: 0;
+
+        p {
+            font-size: clamp(16px, 3vw, 18px);
+            margin-bottom: 10px;
+        }
+
+        ul {
+            margin-top: 12px;
+
+            li {
+                font-size: clamp(14px, 2.5vw, 16px);
+                padding: 10px;
+            }
+        }
+    }
+
+    .imagen {
+        flex: 1;
+        display: flex;
+        animation: fadeInImage 1.2s ease forwards;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-top: 20px;
+
+        img {
+            max-width: 80%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transform: scale(1);
+        }
+    }
+}
+
+// Media query para pantallas más grandes, donde se puede volver a la disposición horizontal
+@media (min-width: 769px) {
+    .resultado-box .contenido-horizontal {
+        flex-direction: row;
+        gap: 32px;
+    }
+
+    .resultado-box .info {
+        flex: 2;
+        padding-right: 16px;
+    }
+
+    .resultado-box .imagen {
+        flex: 1;
+        margin-top: 0;
+    }
+
+    .resultado-box .imagen img {
+        max-width: 100%;
+        transform: scale(1.1);
+    }
+}
+
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInImage {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+//******************************************************************
+//              HOME CHART DONUT
+//******************************************************************
+
+
+.mini-donut {
+    --porcentaje: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+    background: conic-gradient(#786bee calc(var(--porcentaje) * 1%),
+                                #e0e0e0 0);
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.etiqueta {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    background: #f9f9ff;
+    border: 1px solid #d0e2ff;
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: scale(1.02);
+        background: #edf1ff;
+    }
+}
+
+//******************************************************************
+//              HOME RESULTADO FINAL
+//******************************************************************
+
+.resumen-final {
+    margin-top: 20px;
+    padding-top: 12px;
+    border-top: 1px solid #ccc;
+    font-size: clamp(16px, 3vw, 18px);
+    font-weight: 600;
+    color: #222222;
+    text-align: center;
+    animation: slideUpFinal 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes slideUpFinal {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+//******************************************************************
+//              HOME PLACEHOLDERS
+//******************************************************************
+.placeholder-img {
+    background-color: #dbd8d8;
+    border: 2px dashed #bbb;
+    border-radius: 12px;
+    padding: 30px;
+    margin-top: 40px;
+    text-align: center;
+    color: #666;
+    font-style: italic;
+
+    width: 90%;
+    max-width: 300px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.placeholder-resultados {
+    background-color: #dbd8d8;
+    border: 2px dashed #bbb;
+    border-radius: 12px;
+    padding: 30px;
+    margin-top: 20px;
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    width: 90%;
+    max-width: 600px;
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
