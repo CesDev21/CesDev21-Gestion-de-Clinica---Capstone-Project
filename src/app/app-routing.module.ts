@@ -12,14 +12,17 @@ import { ChangePasswdComponent } from './change-passwd/change-passwd.component';
 
 const routes: Routes = [
   // Redirigir a login al iniciar
-  { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
+  { path: '', redirectTo: 'app/Inicio', pathMatch: 'full' }, // Cambiado a 'app/Inicio' para redirigir al inicio, (Originalmente auth/login para inicio de sesion)
+
+  // Ruta de inicio de sesión
+  { path: 'auth/login', component: LoginComponent },
 
   // Layout de autenticación
   {
     path: 'auth',
     component: AuthComponent,
     children: [
-      { path: 'login', component: LoginComponent },
+      { path: 'login', component: MainComponent },
       { path: 'change-password', component: ChangePasswdComponent }
     ]
   },
