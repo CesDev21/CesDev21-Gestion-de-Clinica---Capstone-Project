@@ -15,11 +15,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'app/Inicio', pathMatch: 'full' }, // Cambiado a 'app/Inicio' para redirigir al inicio, (Originalmente auth/login para inicio de sesion)
 
   // Ruta de inicio de sesión
-<<<<<<< HEAD
   { path: 'auth/login', component: LoginComponent },
-=======
-  { path: 'auth/login', component: LoginComponent },    
->>>>>>> 487760c2d22d9ef82ab39375bdc8008dc8fdab28
 
   // Layout de autenticación
   {
